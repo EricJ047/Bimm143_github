@@ -1,2 +1,2 @@
 # Bimm143_github
-My class work for BIMM143 at UCSD
+My class work for BIMM143 at UC San Diego.
