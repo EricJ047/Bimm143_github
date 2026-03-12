@@ -6,8 +6,8 @@ My class work for [BIMM143](https://bioboot.github.io/bimm143_W26/) at UC San Di
 * Introductory materials 
 
 - Class 05 [Data viz with ggplot](Class05/class05_data_viz.md)
-- Class 06 [R functions and R packages from CRAN and BioConductor](Class06/Class06-HW.md)
-- Class 07 [Introduction to machine learning for Bioinformatics](Class07/Class07-machine-learning-1.md)
+- Class 06 [R functions and R packages from CRAN and BioConductor](Class06/Class06.md)
+- Class 07 [Introduction to machine learning for Bioinformatics](Class07/Class07_machine_learning_1.md)
 - Class 08 [Unsupervised Learning Analysis of Human Breast Cancer Cells](Class08/Class08_Mini-project.md)
 - Class 09 [Exploratory Analysis of Halloween Candy](Class09/Class09-candy-mini-project.md)
 - Class 10 [Structural Bioinformatics (Pt. 1)](Class10/Class10_PDB.md)
