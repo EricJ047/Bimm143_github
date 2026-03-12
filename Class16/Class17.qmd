@@ -1,0 +1,99 @@
+---
+title: "Class17"
+author: "Yuxuan Jiang A17324184"
+format: pdf
+toc: true
+---
+## Downstream analysis
+
+```{r}
+library(tximport)
+library(rhdf5)
+# setup the folder and filenames to read
+folders <- dir(pattern="SRR21568*")
+samples <- sub("_quant", "", folders)
+files <- file.path( folders, "abundance.h5" )
+names(files) <- samples
+txi.kallisto <- tximport(files, type = "kallisto", txOut = TRUE)
+```
+```{r}
+head(txi.kallisto$counts)
+```
+```{r}
+colSums(txi.kallisto$counts)
+```
+```{r}
+sum(rowSums(txi.kallisto$counts)>0)
+```
+```{r}
+to.keep <- rowSums(txi.kallisto$counts) > 0
+kset.nonzero <- txi.kallisto$counts[to.keep,]
+keep2 <- apply(kset.nonzero,1,sd)>0
+x <- kset.nonzero[keep2,]
+```
+
+### PCA
+
+```{r}
+pca <- prcomp(t(x), scale=TRUE)
+summary(pca)
+```
+```{r}
+plot(pca$x[,1],pca$x[,2],col=c("blue","blue","red","red"),xlab="PC1",ylab="PC2",pch=16)
+```
+#### ggplot PC1 vs PC2
+
+```{r}
+library(ggrepel)
+colData <- data.frame(condition = factor(rep(c("control", "treatment"), each = 2)))
+rownames(colData) <- colnames(txi.kallisto$counts)
+y <- as.data.frame(pca$x)
+y$Condition <- as.factor(colData$condition)
+
+library(ggplot2)
+ggplot(y)+
+  aes(PC1,PC2,col=Condition)+
+  labs(x="PC1",y="PC2",title="PC1 vs PC2 ")+
+  geom_point()+
+  geom_text_repel(label=rownames(y))+
+  theme_bw()
+```
+
+#### ggplot PC1 vs PC3
+
+```{r}
+library(ggplot2)
+ggplot(y)+
+  aes(PC1,PC3,col=Condition)+
+  labs(x="PC1",y="PC3",title="PC1 vs PC3 ")+
+  geom_point()+
+  geom_text_repel(label=rownames(y))+
+  theme_bw()
+```
+
+#### ggplot PC2 vs PC3
+
+```{r}
+library(ggplot2)
+ggplot(y)+
+  aes(PC2,PC3,col=Condition)+
+  labs(x="PC2",y="PC3",title="PC2 vs PC3 ")+
+  geom_point()+
+  geom_text_repel(label=rownames(y))+
+  theme_bw()
+```
+
+## OPTIONAL: Differential-expression analysis
+
+```{r message=FALSE}
+library(DESeq2)
+sampleTable <- data.frame(condition = factor(rep(c("control", "treatment"), each = 2)))
+rownames(sampleTable) <- colnames(txi.kallisto$counts)
+dds <- DESeqDataSetFromTximport(txi.kallisto,
+                                sampleTable, 
+                                ~condition)
+dds <- DESeq(dds)
+res <- results(dds)
+head(res)
+```
+
