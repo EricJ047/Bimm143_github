@@ -1,0 +1,14 @@
+---
+title: "Class19"
+author: "Yuxuan Jiang A17324184"
+format: html
+---
+
+```{r}
+library(bio3d)
+a <- read.fasta("A17324184_mutant_seq.fa")
+a
+
+
+```
+
