@@ -10,7 +10,7 @@ My class work for [BIMM143](https://bioboot.github.io/bimm143_W26/) at UC San Di
 - Class 07 [Introduction to machine learning for Bioinformatics](Class07/Class07-machine-learning-1.md)
 - Class 08 [Unsupervised Learning Analysis of Human Breast Cancer Cells](Class08/Class08-Mini-project.md)
 - Class 09 [Exploratory Analysis of Halloween Candy](Class09/Class09-candy-mini-project.md)
-- Class 10 [Structural Bioinformatics (Pt. 1)](Class10/Class10-PDB.md)
+- Class 10 [Structural Bioinformatics (Pt. 1)](Class10/Class10_PDB.md)
 - Class 11 [Structural Bioinformatics (pt2. Focus on new AlphaFold2)](Class11/Class11_AlphaFold.md)
 - Class 12 [Genome informatics](Class12/Class12Galaxy.md)
 - Class 13 [Transcriptomics and the analysis of RNA-Seq data](Class13/Class13_RNAseq.md)
