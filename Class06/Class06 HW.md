@@ -1,0 +1,110 @@
+# Class06 HW
+Yuxuan Jiang PID:A17324184
+
+Write a function from the following code
+
+``` r
+library(bio3d)
+s1 <- read.pdb("4AKE") # kinase with drug
+```
+
+      Note: Accessing on-line PDB file
+
+``` r
+s2 <- read.pdb("1AKE") # kinase no drug
+```
+
+      Note: Accessing on-line PDB file
+       PDB has ALT records, taking A only, rm.alt=TRUE
+
+``` r
+s3 <- read.pdb("1E4Y") # kinase with drug
+```
+
+      Note: Accessing on-line PDB file
+
+``` r
+s1.chainA <- trim.pdb(s1, chain="A", elety="CA")
+s2.chainA <- trim.pdb(s2, chain="A", elety="CA")
+s3.chainA <- trim.pdb(s3, chain="A", elety="CA")
+s1.b <- s1.chainA$atom$b
+s2.b <- s2.chainA$atom$b
+s3.b <- s3.chainA$atom$b
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+```
+
+![](Class06-HW_files/figure-commonmark/unnamed-chunk-1-1.png)
+
+``` r
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor")
+```
+
+![](Class06-HW_files/figure-commonmark/unnamed-chunk-1-2.png)
+
+``` r
+plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor")
+```
+
+![](Class06-HW_files/figure-commonmark/unnamed-chunk-1-3.png)
+
+``` r
+library(bio3d) #Access bio3d.
+graph <- function(n,k) 
+#n:number of total kinase inputs;
+#k:a vector including n kinase PDB IDs.
+{
+  for(i in 1:n) #A loop goes through n inputs.
+  {
+    #Get the structure data of kinase k[i] from PDB.
+    s <- read.pdb(k[i]) 
+    #Focus on chain A and Ca atoms of kinase k[i].
+    s.chainA <- trim.pdb(s,chain="A",elety="CA") 
+    #Get the B factor value for Ca atoms in chain A of kinase k[i].
+     s.b <- s.chainA$atom$b 
+    #Print out the input PDB ID of kinase k[i]
+    cat(k[i]) 
+    #Output the plot showing Bfactor value of Ca vs. 
+    #residue position in chain A of kinase k[i].
+    plotb3(s.b,sse=s.chainA,typ="l",ylab="Bfactor") 
+  }
+}
+```
+
+**Input format:**
+
+`graph(number of inputs, c("input 1","input 2",...,"input n"))`
+
+``` r
+graph(3,c("4AKE","1AKE","1E4Y"))
+```
+
+      Note: Accessing on-line PDB file
+
+    Warning in get.pdb(file, path = tempdir(), verbose = FALSE):
+    /var/folders/xx/15z5d5l56hg_8s2365q0dxnm0000gn/T//Rtmpq3CiKS/4AKE.pdb exists.
+    Skipping download
+
+    4AKE
+
+![](Class06-HW_files/figure-commonmark/unnamed-chunk-3-1.png)
+
+      Note: Accessing on-line PDB file
+
+    Warning in get.pdb(file, path = tempdir(), verbose = FALSE):
+    /var/folders/xx/15z5d5l56hg_8s2365q0dxnm0000gn/T//Rtmpq3CiKS/1AKE.pdb exists.
+    Skipping download
+
+       PDB has ALT records, taking A only, rm.alt=TRUE
+    1AKE
+
+![](Class06-HW_files/figure-commonmark/unnamed-chunk-3-2.png)
+
+      Note: Accessing on-line PDB file
+
+    Warning in get.pdb(file, path = tempdir(), verbose = FALSE):
+    /var/folders/xx/15z5d5l56hg_8s2365q0dxnm0000gn/T//Rtmpq3CiKS/1E4Y.pdb exists.
+    Skipping download
+
+    1E4Y
+
+![](Class06-HW_files/figure-commonmark/unnamed-chunk-3-3.png)
