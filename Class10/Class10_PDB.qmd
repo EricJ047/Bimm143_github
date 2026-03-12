@@ -166,8 +166,8 @@ pdbs
 ```
 
 ```{r}
-library(bio3dview)
-view.pdb(pdbs,colorScheme = "residue")
+#library(bio3dview)
+#view.pdb(pdbs,colorScheme = "residue")
 ```
 ## PCA
 We can run PC on our `pdbs` object using the `pca()` function from **bio3d**
